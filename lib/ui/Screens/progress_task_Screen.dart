@@ -43,7 +43,7 @@ class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (context, index) {
-        return TaskItemWidget();
+        // return TaskItemWidget();
       },
     );
   }

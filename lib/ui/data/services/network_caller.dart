@@ -1,8 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:task_management/ui/controllers/auth_controller.dart';
+
+import '../../../app.dart';
+import '../../Screens/sign_in_screen.dart';
 
 class NetworkResponse {
   final int statusCode;
@@ -23,7 +25,8 @@ class NetworkCaller {
     try {
       Uri uri = Uri.parse(url);
       debugPrint('URL => $url');
-      Response response = await get(uri);
+      Response response =
+          await get(uri, headers: {'token': AuthController.accessToken ?? ''});
       debugPrint('Response Code => ${response.statusCode}');
       debugPrint('Response Data => ${response.body}');
       if (response.statusCode == 200) {
@@ -83,5 +86,14 @@ class NetworkCaller {
         errorMessage: e.toString(),
       );
     }
+  }
+
+  static Future<void> _logout() async {
+    await AuthController.clearData();
+    Navigator.pushNamedAndRemoveUntil(
+      TaskManagerApp.navigatorKey.currentState!,
+      SignInScreen.name,
+      (_) => false,
+    );
   }
 }

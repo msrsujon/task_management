@@ -166,9 +166,9 @@ class _SignInScreenState extends State<SignInScreen> {
       setState(() {});
 
       if (response.statusCode == 401) {
-        ShowSnakBarMessage(context, 'Email/Password invalid! try again');
+        showSnackBarMessage(context, 'Email/Password invalid! try again');
       } else {
-        ShowSnakBarMessage(context, 'login invalid! try again');
+        showSnackBarMessage(context, 'login invalid! try again');
       }
     }
   }

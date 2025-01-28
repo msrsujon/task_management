@@ -151,11 +151,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() {});
     if (response.isSuccess) {
       _clearTextFields();
-      ShowSnakBarMessage(context, 'New user registration successful!');
+      showSnackBarMessage(context, 'New user registration successful!');
 
       Navigator.pushReplacementNamed(context, SignInScreen.name);
     } else {
-      ShowSnakBarMessage(context, response.errorMessage);
+      showSnackBarMessage(context, response.errorMessage);
     }
   }
 

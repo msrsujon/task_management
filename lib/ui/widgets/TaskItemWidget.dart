@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-
 import '../Screens/update_profile_screen.dart';
+import '../data/models/task_model.dart';
 
 class TaskItemWidget extends StatelessWidget {
   const TaskItemWidget({
     super.key,
+    required this.taskModel,
   });
+
+  final TaskModel taskModel;
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +16,12 @@ class TaskItemWidget extends StatelessWidget {
       elevation: 0,
       child: ListTile(
         tileColor: Colors.white,
-        title: Text('Title will be here'),
+        title: Text(taskModel.title ?? ''),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Description will be here"),
-            Text("Date:1/5/25"),
+            Text(taskModel.description ?? ''),
+            Text("Date:${taskModel.createdDate ?? ''}"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

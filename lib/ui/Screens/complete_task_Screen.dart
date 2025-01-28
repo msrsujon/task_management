@@ -13,6 +13,8 @@ class CompleteTaskScreen extends StatefulWidget {
 }
 
 class _CompleteTaskScreenState extends State<CompleteTaskScreen> {
+  get completeTaskListModel => null;
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -41,40 +43,28 @@ class _CompleteTaskScreenState extends State<CompleteTaskScreen> {
 
   ListView buildTaskListView() {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: completeTaskListModel?.taskList!.length ?? 0,
+      shrinkWrap: true,
+      primary: false,
       itemBuilder: (context, index) {
-        return TaskItemWidget();
+        return TaskItemWidget(
+          taskModel: completeTaskListModel!.taskList![index],
+        );
       },
     );
   }
 
   Widget buildTaskStatusSummaryWidget() {
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TaskStatusSummaryCounterWidget(
-              count: '09',
-              title: 'new',
-            ),
-            TaskStatusSummaryCounterWidget(
-              count: '12',
-              title: 'Progress',
-            ),
-            TaskStatusSummaryCounterWidget(
-              count: '15',
-              title: 'Complete',
-            ),
-            TaskStatusSummaryCounterWidget(
-              count: '10',
-              title: 'Cancel',
-            ),
-          ],
-        ),
-      ),
-    );
+        scrollDirection: Axis.horizontal,
+        child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            itemCount: completeTaskListModel?.taskByStatusList?.length ?? 0,
+            itemBuilder: (context, index) {
+              final model = completeTaskListModel!.taskByStatusList![index];
+              return TaskStatusSummaryCounterWidget(
+                  title: model.sId ?? '', count: model.sum.toString());
+            }));
   }
 }
