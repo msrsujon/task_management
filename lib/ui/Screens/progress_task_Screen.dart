@@ -41,9 +41,11 @@ class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
 
   ListView buildTaskListView() {
     return ListView.builder(
-      itemCount: 10,
       itemBuilder: (context, index) {
-        // return TaskItemWidget();
+        // return TaskItemWidget(
+        //   status: 'new',
+        //   color: Colors.lightGreen,
+        // );
       },
     );
   }

@@ -6,9 +6,11 @@ class TaskItemWidget extends StatelessWidget {
   const TaskItemWidget({
     super.key,
     required this.taskModel,
+    required this.color,
   });
 
   final TaskModel taskModel;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +31,11 @@ class TaskItemWidget extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
+                    color: _getStatusColor(taskModel.status ?? 'New'),
                   ),
                   child: Text(
-                    "new",
-                    style: TextStyle(color: Colors.white),
+                    taskModel.status ?? 'New',
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
                 Row(
@@ -55,5 +58,17 @@ class TaskItemWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Color _getStatusColor(String status) {
+    if (status == 'New') {
+      return Colors.blue;
+    } else if (status == 'Progress') {
+      return Colors.lightGreen;
+    } else if (status == 'Completed') {
+      return Colors.green;
+    } else {
+      return Colors.red;
+    }
   }
 }

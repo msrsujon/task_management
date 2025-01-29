@@ -36,6 +36,12 @@ class NetworkCaller {
           responseData: decodedResponse,
           isSuccess: true,
         );
+      } else if (response.statusCode == 401) {
+        await _logout();
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          isSuccess: false,
+        );
       } else {
         return NetworkResponse(
           statusCode: response.statusCode,
@@ -73,6 +79,12 @@ class NetworkCaller {
           responseData: decodedResponse,
           isSuccess: true,
         );
+      } else if (response.statusCode == 401) {
+        await _logout();
+        return NetworkResponse(
+          statusCode: response.statusCode,
+          isSuccess: false,
+        );
       } else {
         return NetworkResponse(
           statusCode: response.statusCode,
@@ -91,7 +103,7 @@ class NetworkCaller {
   static Future<void> _logout() async {
     await AuthController.clearData();
     Navigator.pushNamedAndRemoveUntil(
-      TaskManagerApp.navigatorKey.currentState!,
+      TaskManagerApp.navigatorKey.currentContext!,
       SignInScreen.name,
       (_) => false,
     );

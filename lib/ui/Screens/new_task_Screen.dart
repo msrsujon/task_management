@@ -68,6 +68,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
       primary: false,
       itemBuilder: (context, index) {
         return TaskItemWidget(
+          color: Colors.blue,
           taskModel: newTaskListModel!.taskList![index],
         );
       },

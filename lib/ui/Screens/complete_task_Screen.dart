@@ -48,6 +48,7 @@ class _CompleteTaskScreenState extends State<CompleteTaskScreen> {
       primary: false,
       itemBuilder: (context, index) {
         return TaskItemWidget(
+          color: Colors.green,
           taskModel: completeTaskListModel!.taskList![index],
         );
       },
